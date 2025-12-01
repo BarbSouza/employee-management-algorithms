@@ -22,15 +22,16 @@ public class EmployeeController {
             switch (choice) {
                 case 1:
                     view.displayEmployees(employees, employees.size());
+                    //Sort employees by name logic
                     break;
                 case 2:
-                    view.displayEmployees(employees, 5);
+                    // Search employee logic
                     break;
                 case 3:
-                    // Additional functionality can be added here
+                    // Add employee records logic
                     break;
                 case 4:
-                    // Additional functionality can be added here
+                    // Binary tree creation logic
                     break;
                 case 5:
                     exit = true;
