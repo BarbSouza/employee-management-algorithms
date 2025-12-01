@@ -16,5 +16,27 @@ public enum MenuOption {
     public String getDisplayName() {
         return displayName;
     }
-    
+
+    public static MenuOption fromNumber(int number) {
+        switch (number) {
+            case 1:
+                return SORT;
+            case 2:
+                return SEARCH;
+            case 3:
+                return ADD_RECORDS;
+            case 4:
+                return CREATE_BINARY_TREE;
+            case 5:
+                return EXIT;
+            default:
+                throw new IllegalArgumentException("Invalid menu option number: " + number);
+        }
+    }
+
+    public static void displayMenuOptions() {
+        for (MenuOption menuOption : MenuOption.values()) {
+            System.out.println(menuOption.getDisplayName());
+        }
+    }
 }
