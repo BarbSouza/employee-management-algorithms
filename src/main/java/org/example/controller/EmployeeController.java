@@ -28,6 +28,21 @@ public class EmployeeController {
         employees = sortedEmployees;
     }
 
+    private void searchEmployee() {
+        view.displayMessage("--- Search Employee by Full Name ---");
+        String searchName = view.getSearchName();
+
+        employees = SortingAlgorithms.mergeSort(new ArrayList<>(employees));
+
+        Employee foundEmployee = org.example.utils.SearchAlgorithms.binarySearchHelper(employees, searchName);
+        if (foundEmployee != null) {
+            view.displayMessage("Employee found:");
+            view.displayEmployee(foundEmployee);
+        } else {
+            view.displayMessage("Employee with name '" + searchName + "' not found.");
+        }
+    }
+
     public void run() {
         boolean exit = false;
         while (!exit) {
@@ -41,7 +56,7 @@ public class EmployeeController {
                         sortEmployees();
                         break;
                     case SEARCH:
-                        //searchEmployee();
+                        searchEmployee();
                         break;
                     case ADD_RECORDS:
                         //addEmployee();

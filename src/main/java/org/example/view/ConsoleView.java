@@ -87,6 +87,10 @@ public class ConsoleView {
         System.err.println("Error: " + errorMessage);
     }
 
+    public String getSearchName() {
+        return getUserInput("Enter name to search: ");
+    }
+
     public void closeScanner() {
             scanner.close();
     }
