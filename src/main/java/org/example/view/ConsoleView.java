@@ -74,6 +74,18 @@ public class ConsoleView {
         System.out.println("------------------------");
     }
 
+    public void displayEmployeeDetails(Employee employee) {
+        if (employee == null) {
+            System.out.println("Employee not found.");
+            return;
+        }
+        System.out.println("--- Employee Details ---");
+        System.out.println("Name: " + employee.getFullName());
+        System.out.println("Job Title: " + employee.getJobTitle());
+        System.out.println("Department: " + employee.getDepartment());
+        System.out.println("------------------------");
+    }
+
     public String getUserInput(String prompt) {
         System.out.print(prompt);
         return scanner.nextLine().trim();
@@ -91,7 +103,58 @@ public class ConsoleView {
         return getUserInput("Enter name to search: ");
     }
 
+    public void displayGenderOptions() {
+        System.out.println("--- Select Gender ---");
+        System.out.println("1. Male");
+        System.out.println("2. Female");
+        System.out.println("3. Other");
+        System.out.println("---------------------");
+    }
+
+    public void displayAvailableJobs(List<String> jobTitles) {
+        System.out.println("--- Available Jobs ---");
+        for (int i = 0; i < jobTitles.size(); i++) {
+            System.out.println((i + 1) + ". " + jobTitles.get(i));
+        }
+        System.out.println("---------------------------");
+    }
+
+    public void displayAvailableDepartments(List<String> departments) {
+        System.out.println("--- Available Departments ---");
+        for (int i = 0; i < departments.size(); i++) {
+            System.out.println((i + 1) + ". " + departments.get(i));
+        }
+        System.out.println("-----------------------------");
+    }
+
+    public int getChoiceFromList(String prompt, int maxOption) {
+        while (true) {
+            String input = getUserInput(prompt);
+            try {
+                int choice = Integer.parseInt(input);
+                if (choice >= 1 && choice <= maxOption) {
+                    return choice;
+                } else {
+                    displayError("Please enter a number between 1 and " + maxOption + ".");
+                }
+            } catch (NumberFormatException e) {
+                displayError("Invalid input. Please enter a valid number.");
+            }
+        }
+    }
+
+    public double getDoubleInput(String s) {
+        while (true) {
+            String input = getUserInput(s);
+            try {
+                return Double.parseDouble(input);
+            } catch (NumberFormatException e) {
+                displayError("Invalid input. Please enter a valid number.");
+            }
+        }
+    }
+
     public void closeScanner() {
-            scanner.close();
+        scanner.close();
     }
 }
