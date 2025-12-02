@@ -2,6 +2,7 @@ package org.example.controller;
 
 import org.example.model.Employee;
 import org.example.utils.MenuOption;
+import org.example.utils.SearchAlgorithms;
 import org.example.utils.SortingAlgorithms;
 import org.example.view.ConsoleView;
 
@@ -17,24 +18,27 @@ public class EmployeeController {
         this.employees = employees;
     }
 
+    private boolean isSorted = false;
+
     private void sortEmployees() {
         view.displayMessage("--- Sorting Employees by Name ---");
-
-        List<Employee> sortedEmployees = SortingAlgorithms.mergeSort(new ArrayList<>(employees));
-
+        employees = SortingAlgorithms.mergeSort(new ArrayList<>(employees));
+        isSorted = true;
         view.displayMessage("--- Displaying the first 20 employees ---");
-        view.displayEmployees(sortedEmployees, 20);
-
-        employees = sortedEmployees;
+        view.displayEmployees(employees, 20);
     }
 
     private void searchEmployee() {
         view.displayMessage("--- Search Employee by Full Name ---");
-        String searchName = view.getSearchName();
+        String searchName = view.getUserInput("Enter full name to search: ");
 
-        employees = SortingAlgorithms.mergeSort(new ArrayList<>(employees));
+        if (!isSorted) {
+            view.displayMessage("Sorting list before search...");
+            employees = SortingAlgorithms.mergeSort(new ArrayList<>(employees));
+            isSorted = true;
+        }
 
-        Employee foundEmployee = org.example.utils.SearchAlgorithms.binarySearchHelper(employees, searchName);
+        Employee foundEmployee = SearchAlgorithms.binarySearchHelper(employees, searchName);
         if (foundEmployee != null) {
             view.displayMessage("Employee found:");
             view.displayEmployee(foundEmployee);
