@@ -1,8 +1,10 @@
 package org.example.controller;
 
 import org.example.model.Employee;
+import org.example.utils.SortingAlgorithms;
 import org.example.view.ConsoleView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class EmployeeController {
@@ -14,15 +16,26 @@ public class EmployeeController {
         this.employees = employees;
     }
 
+    private void sortEmployees() {
+        view.displayMessage("--- Sorting Employees by Name ---");
+
+        List<Employee> sortedEmployees = SortingAlgorithms.mergeSort(new ArrayList<>(employees));
+
+        view.displayMessage("--- Displaying the first 20 employees ---");
+        view.displayEmployees(sortedEmployees, 20);
+
+        employees = sortedEmployees;
+    }
+
     public void run() {
         boolean exit = false;
         while (!exit) {
+            //view.displayEmployees(employees, employees.size());
             view.displayMenu();
             int choice = view.getUserChoice();
             switch (choice) {
                 case 1:
-                    view.displayEmployees(employees, employees.size());
-                    //Sort employees by name logic
+                    sortEmployees();
                     break;
                 case 2:
                     // Search employee logic
