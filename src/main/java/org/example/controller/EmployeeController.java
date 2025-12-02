@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.model.Employee;
+import org.example.utils.MenuOption;
 import org.example.utils.SortingAlgorithms;
 import org.example.view.ConsoleView;
 
@@ -33,25 +34,27 @@ public class EmployeeController {
             //view.displayEmployees(employees, employees.size());
             view.displayMenu();
             int choice = view.getUserChoice();
-            switch (choice) {
-                case 1:
-                    sortEmployees();
-                    break;
-                case 2:
-                    // Search employee logic
-                    break;
-                case 3:
-                    // Add employee records logic
-                    break;
-                case 4:
-                    // Binary tree creation logic
-                    break;
-                case 5:
-                    exit = true;
-                    System.out.println("Exiting the application. Goodbye!");
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
+            try {
+                MenuOption option = MenuOption.fromNumber(choice);
+                switch (option) {
+                    case SORT:
+                        sortEmployees();
+                        break;
+                    case SEARCH:
+                        //searchEmployee();
+                        break;
+                    case ADD_RECORDS:
+                        //addEmployee();
+                        break;
+                    case CREATE_BINARY_TREE:
+                        //createBinaryTree();
+                        break;
+                    case EXIT:
+                        exit = true;
+                        break;
+                }
+            } catch (IllegalArgumentException e) {
+                view.displayError("Invalid choice. Please try again.");
             }
         }
     }

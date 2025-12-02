@@ -45,8 +45,13 @@ public class ConsoleView {
                 break;
             }
             System.out.println((count + 1) + ". " + emp.getFullName() +
+                    " | Gender:" + emp.getGender() +
+                    " | Email: " + emp.getEmail() +
+                    " | Salary: " + emp.getSalary() +
                     " | Position: " + emp.getPosition() +
-                    " | Department: " + emp.getDepartment());
+                    " | Department: " + emp.getDepartment() +
+                    " | Job Title: " + emp.getJobTitle() +
+                    " | Company: " + emp.getCompany());
             count++;
         }
         System.out.println("Total Employees Displayed: " + count);
