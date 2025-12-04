@@ -98,25 +98,59 @@ public class EmployeeController {
         view.displayAvailablePositions();
         int positionChoice = view.getChoiceFromList("Select Position by number: ", 4);
         String selectedPosition;
+        int selectedLevel;
         switch (positionChoice) {
             case 1:
-                selectedPosition = "Level 2";
+                selectedPosition = "Level 1";
+                selectedLevel = 1;
                 break;
             case 2:
-                selectedPosition = "Level 3";
+                selectedPosition = "Level 2";
+                selectedLevel = 2;
                 break;
             case 3:
+                selectedPosition = "Level 3";
+                selectedLevel = 3;
+                break;
+            case 4:
                 selectedPosition = "Level 4";
+                selectedLevel = 4;
                 break;
             default:
                 selectedPosition = "Level 5";
+                selectedLevel = 5;
         }
 
         Set<String> uniqueReportsTo = new HashSet<>();
         for (Employee emp : employees) {
-            if(emp.getReportsTo() != null && !emp.getReportsTo().isEmpty()) {
-                uniqueReportsTo.add(emp.getReportsTo());
+            if(emp.getPosition() != null && !emp.getPosition().isEmpty()) {
+                try{
+                    String posStr = emp.getPosition().replace("Level ", "");
+                    int empLevel = Integer.parseInt(posStr);
+                    if (empLevel < selectedLevel) {
+                        uniqueReportsTo.add(emp.getFullName());
+                    }
+                } catch (NumberFormatException e) {
+                    continue;
+                }
             }
+        }
+
+        if(selectedLevel == 1) {
+            uniqueReportsTo.add("Owner");
+        }
+
+        if(selectedLevel == 2) {
+            for(Employee emp : employees) {
+                if(emp.getPosition() == null) {
+                    uniqueReportsTo.add(emp.getFullName());
+                }
+            }
+        }
+
+        if (uniqueReportsTo.isEmpty()) {
+            view.displayMessage("No available supervisors found for the selected position level.");
+            return;
         }
         List<String> reportsToList = new ArrayList<>(uniqueReportsTo);
 

@@ -113,10 +113,11 @@ public class ConsoleView {
 
     public void displayAvailablePositions() {
         System.out.println("--- Available Positions ---");
-        System.out.println("1. Level 2");
-        System.out.println("2. Level 3");
-        System.out.println("3. Level 4");
-        System.out.println("4. Level 5");
+        System.out.println("1. Level 1");
+        System.out.println("2. Level 2");
+        System.out.println("3. Level 3");
+        System.out.println("4. Level 4");
+        System.out.println("5. Level 5");
         System.out.println("-----------------------------");
     }
 

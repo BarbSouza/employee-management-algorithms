@@ -1,5 +1,5 @@
 First name,Last name,Gender,Email,Salary,Department,Position,Job title,Reports to
-Margaret,Thompson,Female,mthompson@oakwood.edu,95000.00,Administration,Level 1,School Director,
+Margaret,Thompson,Female,mthompson@oakwood.edu,95000.00,Administration,Level 1,School Director, 
 Robert,Chen,Male,rchen@oakwood.edu,78000.00,Administration,Level 2,Vice Director - Academic,Margaret Thompson
 Linda,Martinez,Female,lmartinez@oakwood.edu,78000.00,Administration,Level 2,Vice Director - Operations,Margaret Thompson
 Patricia,Williams,Female,pwilliams@oakwood.edu,65000.00,Mathematics,Level 3,Head of Mathematics,Robert Chen
