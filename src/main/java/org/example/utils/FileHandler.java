@@ -50,7 +50,7 @@ public class FileHandler {
         String position = values[6].trim();
         employee.setPosition(position.isEmpty() ? "Manager" : position);
         employee.setJobTitle(values[7].trim());
-        employee.setCompany(values[8].trim());
+        employee.setReportsTo(values[8].trim());
         return employee;
     }
 }

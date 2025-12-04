@@ -80,20 +80,8 @@ public class EmployeeController {
         }
 
         double salary = view.getDoubleInput("Enter Salary: ");
-        String company = view.getUserInput("Enter Company: ");
-        String position = view.getUserInput("Enter Position: ");
 
-        Set<String> uniqueJobTitles = new HashSet<>();
-        for (Employee emp : employees) {
-            if(emp.getJobTitle() != null && !emp.getJobTitle().isEmpty()) {
-                uniqueJobTitles.add(emp.getJobTitle());
-            }
-        }
-        List<String> jobTitleList = new ArrayList<>(uniqueJobTitles);
-
-        view.displayAvailableJobs(jobTitleList);
-        int jobChoice = view.getChoiceFromList("Select Job Title by number: ", jobTitleList.size());
-        String selectedJobTitle = jobTitleList.get(jobChoice - 1);
+        String jobTitle = formatName(view.getUserInput("Enter Job Title: "));
 
         Set<String> uniqueDepartments = new HashSet<>();
         for (Employee emp : employees) {
@@ -107,16 +95,48 @@ public class EmployeeController {
         int deptChoice = view.getChoiceFromList("Select Department by number: ", departmentList.size());
         String selectedDepartment = departmentList.get(deptChoice - 1);
 
+        view.displayAvailablePositions();
+        int positionChoice = view.getChoiceFromList("Select Position by number: ", 4);
+        String selectedPosition;
+        switch (positionChoice) {
+            case 1:
+                selectedPosition = "Level 2";
+                break;
+            case 2:
+                selectedPosition = "Level 3";
+                break;
+            case 3:
+                selectedPosition = "Level 4";
+                break;
+            default:
+                selectedPosition = "Level 5";
+        }
+
+        Set<String> uniqueReportsTo = new HashSet<>();
+        for (Employee emp : employees) {
+            if(emp.getReportsTo() != null && !emp.getReportsTo().isEmpty()) {
+                uniqueReportsTo.add(emp.getReportsTo());
+            }
+        }
+        List<String> reportsToList = new ArrayList<>(uniqueReportsTo);
+
+        view.displayAvailableReportsTo(reportsToList);
+        int reportsToChoice = view.getChoiceFromList("Select who the employee reports to: ", reportsToList.size());
+        String selectedReportsTo = reportsToList.get(reportsToChoice - 1);
+
+        String emailDomain = "oakwood.edu";
+        String email = (firstName.charAt(0) + lastName + "@" + emailDomain).toLowerCase();
+
         Employee newEmployee = new Employee(
                 firstName,
                 lastName,
                 selectedGender,
-                firstName.toLowerCase().charAt(0) + lastName.toLowerCase() + "@" + company.toLowerCase() + ".com",
+                email,
                 salary,
                 selectedDepartment,
-                position,
-                selectedJobTitle,
-                company
+                selectedPosition,
+                jobTitle,
+                selectedReportsTo
         );
         employees.add(newEmployee);
         isSorted = false;
@@ -143,6 +163,7 @@ public class EmployeeController {
         view.displayMessage("Total Nodes: " + tree.getNodeCount());
 
     }
+
 
     public void run() {
         boolean exit = false;

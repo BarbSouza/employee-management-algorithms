@@ -51,7 +51,7 @@ public class ConsoleView {
                     " | Position: " + emp.getPosition() +
                     " | Department: " + emp.getDepartment() +
                     " | Job Title: " + emp.getJobTitle() +
-                    " | Company: " + emp.getCompany());
+                    " | Reports To: " + emp.getReportsTo());
             count++;
         }
         System.out.println("Total Employees Displayed: " + count);
@@ -70,7 +70,7 @@ public class ConsoleView {
         System.out.println("Department: " + employee.getDepartment());
         System.out.println("Position: " + employee.getPosition());
         System.out.println("Job Title: " + employee.getJobTitle());
-        System.out.println("Company: " + employee.getCompany());
+        System.out.println("Reports To: " + employee.getReportsTo());
         System.out.println("------------------------");
     }
 
@@ -111,18 +111,27 @@ public class ConsoleView {
         System.out.println("---------------------");
     }
 
-    public void displayAvailableJobs(List<String> jobTitles) {
-        System.out.println("--- Available Jobs ---");
-        for (int i = 0; i < jobTitles.size(); i++) {
-            System.out.println((i + 1) + ". " + jobTitles.get(i));
-        }
-        System.out.println("---------------------------");
+    public void displayAvailablePositions() {
+        System.out.println("--- Available Positions ---");
+        System.out.println("1. Level 2");
+        System.out.println("2. Level 3");
+        System.out.println("3. Level 4");
+        System.out.println("4. Level 5");
+        System.out.println("-----------------------------");
     }
 
     public void displayAvailableDepartments(List<String> departments) {
         System.out.println("--- Available Departments ---");
         for (int i = 0; i < departments.size(); i++) {
             System.out.println((i + 1) + ". " + departments.get(i));
+        }
+        System.out.println("-----------------------------");
+    }
+
+    public void displayAvailableReportsTo(List<String> reportsTo) {
+        System.out.println("--- Available Reports To ---");
+        for (int i = 0; i < reportsTo.size(); i++) {
+            System.out.println((i + 1) + ". " + reportsTo.get(i));
         }
         System.out.println("-----------------------------");
     }

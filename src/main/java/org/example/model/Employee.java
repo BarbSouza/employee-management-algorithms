@@ -9,9 +9,9 @@ public class Employee {
     private String department;
     private String position;
     private String jobTitle;
-    private String company;
+    private String reportsTo;
 
-    public Employee(String firstName, String lastName, String gender, String email, double salary, String department, String position, String jobTitle, String company) {
+    public Employee(String firstName, String lastName, String gender, String email, double salary, String department, String position, String jobTitle, String reportsTo) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
@@ -20,7 +20,7 @@ public class Employee {
         this.department = department;
         this.position = position;
         this.jobTitle = jobTitle;
-        this.company = company;
+        this.reportsTo = reportsTo;
     }
 
     public Employee() {
@@ -89,12 +89,12 @@ public class Employee {
         this.jobTitle = jobTitle;
     }
 
-    public String getCompany() {
-        return company;
+    public String getReportsTo() {
+        return reportsTo;
     }
 
-    public void setCompany(String company) {
-        this.company = company;
+    public void setReportsTo(String reportsTo) {
+        this.reportsTo = reportsTo;
     }
 
     public String getFullName() {
@@ -111,7 +111,7 @@ public class Employee {
                 ", Department:'" + department + '\'' +
                 ", Position:'" + position + '\'' +
                 ", Job Title:'" + jobTitle + '\'' +
-                ", Company='" + company + '\'' +
+                ", Reports To='" + reportsTo + '\'' +
                 '}';
         }
 }
