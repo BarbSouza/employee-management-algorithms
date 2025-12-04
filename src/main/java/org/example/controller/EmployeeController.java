@@ -1,6 +1,7 @@
 package org.example.controller;
 
 import org.example.model.Employee;
+import org.example.model.EmployeeBinaryTree;
 import org.example.utils.MenuOption;
 import org.example.utils.SearchAlgorithms;
 import org.example.utils.SortingAlgorithms;
@@ -49,15 +50,34 @@ public class EmployeeController {
         }
     }
 
+    private String formatName(String name) {
+        if (name == null || name.trim().isEmpty()) {
+            return "";
+        }
+        name = name.trim();
+        return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
+    }
+
     private void addEmployee() {
         view.displayMessage("--- Add New Employee ---");
 
-        String firstName = view.getUserInput("Enter First Name: ");
-        String lastName = view.getUserInput("Enter Last Name: ");
+        String firstName = formatName(view.getUserInput("Enter First Name: "));
+        String lastName = formatName(view.getUserInput("Enter Last Name: "));
 
+        // Validate gender selection
         view.displayGenderOptions();
         int genderChoice = view.getChoiceFromList("Select Gender by number: ", 3);
-        String selectedGender = genderChoice == 1 ? "Male" : "Female";
+        String selectedGender;
+        switch (genderChoice) {
+            case 1:
+                selectedGender = "Male";
+                break;
+            case 2:
+                selectedGender = "Female";
+                break;
+            default:
+                selectedGender = "Other";
+        }
 
         double salary = view.getDoubleInput("Enter Salary: ");
         String company = view.getUserInput("Enter Company: ");
@@ -104,6 +124,26 @@ public class EmployeeController {
         view.displayEmployee(newEmployee);
     }
 
+    private void createBinaryTree() {
+
+        view.displayMessage("--- Create Binary Search Tree of Employees ---");
+
+        EmployeeBinaryTree tree = new EmployeeBinaryTree();
+
+        int count = Math.min(20, employees.size());
+        for (int i = 0; i < count; i++) {
+            tree.insert(employees.get(i));
+        }
+
+        view.displayMessage("--- Employee Hierarchy Tree Created ---");
+        tree.levelOrderTraversal(view);
+
+        view.displayMessage("--- Tree Statistics ---");
+        view.displayMessage("Tree Height: " + tree.getHeight());
+        view.displayMessage("Total Nodes: " + tree.getNodeCount());
+
+    }
+
     public void run() {
         boolean exit = false;
         while (!exit) {
@@ -123,7 +163,7 @@ public class EmployeeController {
                         addEmployee();
                         break;
                     case CREATE_BINARY_TREE:
-                        //createBinaryTree();
+                        createBinaryTree();
                         break;
                     case EXIT:
                         exit = true;
