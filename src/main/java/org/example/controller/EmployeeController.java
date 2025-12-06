@@ -61,8 +61,21 @@ public class EmployeeController {
     private void addEmployee() {
         view.displayMessage("--- Add New Employee ---");
 
-        String firstName = formatName(view.getUserInput("Enter First Name: "));
-        String lastName = formatName(view.getUserInput("Enter Last Name: "));
+        String firstName;
+        do {
+            firstName = view.getUserInput("Enter First Name: ");
+            if (firstName.trim().isEmpty()) {
+                view.displayError("First Name cannot be empty. Please try again.");
+            }
+        } while (firstName.trim().isEmpty());
+
+        String lastName;
+        do {
+            lastName = view.getUserInput("Enter Last Name: ");
+            if (lastName.trim().isEmpty()) {
+                view.displayError("Last Name cannot be empty. Please try again.");
+            }
+        } while (lastName.trim().isEmpty());
 
         // Validate gender selection
         view.displayGenderOptions();
@@ -79,9 +92,21 @@ public class EmployeeController {
                 selectedGender = "Other";
         }
 
-        double salary = view.getDoubleInput("Enter Salary: ");
+        double salary;
+        do {
+            salary = view.getDoubleInput("Enter Salary: ");
+            if (salary < 0) {
+                view.displayError("Salary cannot be negative. Please enter a valid salary.");
+            }
+        } while (salary < 0);
 
-        String jobTitle = formatName(view.getUserInput("Enter Job Title: "));
+        String jobTitle;
+        do {
+            jobTitle = formatName(view.getUserInput("Enter Job Title: "));
+            if (jobTitle.trim().isEmpty()) {
+                view.displayError("Job Title cannot be empty. Please try again.");
+            }
+        } while (jobTitle.trim().isEmpty());
 
         Set<String> uniqueDepartments = new HashSet<>();
         for (Employee emp : employees) {
@@ -137,7 +162,7 @@ public class EmployeeController {
         }
 
         if(selectedLevel == 1) {
-            uniqueReportsTo.add("Owner");
+            uniqueReportsTo.add("No Supervisor");
         }
 
         if(selectedLevel == 2) {
