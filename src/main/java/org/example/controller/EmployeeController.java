@@ -96,7 +96,7 @@ public class EmployeeController {
         String selectedDepartment = departmentList.get(deptChoice - 1);
 
         view.displayAvailablePositions();
-        int positionChoice = view.getChoiceFromList("Select Position by number: ", 4);
+        int positionChoice = view.getChoiceFromList("Select Position by number: ", 5);
         String selectedPosition;
         int selectedLevel;
         switch (positionChoice) {
@@ -158,7 +158,7 @@ public class EmployeeController {
         int reportsToChoice = view.getChoiceFromList("Select who the employee reports to: ", reportsToList.size());
         String selectedReportsTo = reportsToList.get(reportsToChoice - 1);
 
-        String emailDomain = "oakwood.edu";
+        String emailDomain = "cct.edu";
         String email = (firstName.charAt(0) + lastName + "@" + emailDomain).toLowerCase();
 
         Employee newEmployee = new Employee(
@@ -179,23 +179,56 @@ public class EmployeeController {
     }
 
     private void createBinaryTree() {
-
         view.displayMessage("--- Create Binary Search Tree of Employees ---");
+
+        List<Employee> hierarchicalEmployees = sortByHierarchyLevel(employees);
 
         EmployeeBinaryTree tree = new EmployeeBinaryTree();
 
-        int count = Math.min(20, employees.size());
+        int count = Math.min(20, hierarchicalEmployees.size());
+
+        view.displayMessage("--- Create Binary Tree of " + count + " Employees ---");
+        view.displayMessage("(Based on Hierarchical Position Levels (1 to 5)");
+
         for (int i = 0; i < count; i++) {
-            tree.insert(employees.get(i));
+            tree.insert(hierarchicalEmployees.get(i));
         }
 
-        view.displayMessage("--- Employee Hierarchy Tree Created ---");
+        view.displayMessage("--- School Employees Hierarchy Tree ---");
         tree.levelOrderTraversal(view);
 
         view.displayMessage("--- Tree Statistics ---");
         view.displayMessage("Tree Height: " + tree.getHeight());
         view.displayMessage("Total Nodes: " + tree.getNodeCount());
 
+    }
+
+    private List<Employee> sortByHierarchyLevel(List<Employee> employees) {
+        List<Employee> sorted = new ArrayList<>(employees);
+
+        sorted.sort((e1, e2) -> {
+            int level1 = extractLevel(e1.getPosition());
+            int level2 = extractLevel(e2.getPosition());
+
+            int levelComparison = Integer.compare(level1, level2);
+            if (levelComparison != 0) {
+                return levelComparison;
+            }
+            return e1.getDepartment().compareToIgnoreCase(e2.getDepartment());
+        });
+        return sorted;
+    }
+
+    private int extractLevel(String position) {
+        if (position == null || position.isEmpty()) {
+            return Integer.MAX_VALUE;
+        }
+        try {
+            String levelStr = position.replace("Level ", "");
+            return Integer.parseInt(levelStr);
+        } catch (NumberFormatException e) {
+            return Integer.MAX_VALUE;
+        }
     }
 
 
