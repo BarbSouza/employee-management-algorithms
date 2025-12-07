@@ -1,12 +1,15 @@
-package org.example;
+package org.example.controller;
 
-import org.example.controller.EmployeeController;
 import org.example.model.Employee;
 import org.example.utils.FileHandler;
 
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Main class to run the Employee Management System application.
+ * It handles user input for the filename and initializes the controller.
+ */
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -26,20 +29,21 @@ public class Main {
                 return;
             }
 
-            // Try to read the file
+            // Attempt to read employees from the specified file
             try {
                 employees = FileHandler.readEmployeesFromFile(filename);
 
                 if (employees.isEmpty()) {
                     System.out.println("No employees found in file. Please try again.\n");
-                    employees = null; // Reset to keep looping
+                    employees = null;
                 }
             } catch (Exception e) {
                 System.out.println("Error: Could not read file '" + filename + "'. Please check the filename and try again.\n");
-                employees = null; // Reset to keep looping
+                employees = null;
             }
         }
 
+        // Initialize and run the controller
         EmployeeController controller = new EmployeeController(employees);
         controller.run();
 

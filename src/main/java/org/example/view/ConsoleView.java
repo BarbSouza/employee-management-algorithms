@@ -8,6 +8,10 @@ import java.util.Scanner;
 
 import static org.example.utils.MenuOption.displayMenuOptions;
 
+/**
+ * ConsoleView handles all console interactions with the user.
+ * It displays menus, prompts for input, and shows employee information.
+ */
 public class ConsoleView {
     private Scanner scanner;
 
@@ -83,6 +87,7 @@ public class ConsoleView {
         System.out.println("Name: " + employee.getFullName());
         System.out.println("Job Title: " + employee.getJobTitle());
         System.out.println("Department: " + employee.getDepartment());
+        System.out.println("Position: " + employee.getPosition());
         System.out.println("------------------------");
     }
 

@@ -1,5 +1,8 @@
 package org.example.model;
 
+/**
+ * This class represents a binary tree structure to store Employee objects.
+ */
 public class EmployeeBinaryTree {
     private TreeNode root;
 
@@ -7,6 +10,7 @@ public class EmployeeBinaryTree {
         this.root = null;
     }
 
+    // Insert an employee into the binary tree using level-order insertion
     public void insert(Employee employee) {
         TreeNode newNode = new TreeNode(employee);
 
@@ -15,6 +19,7 @@ public class EmployeeBinaryTree {
             return;
         }
 
+        // Level-order traversal to find the first available position
         java.util.Queue<TreeNode> queue = new java.util.LinkedList<>();
         queue.add(root);
 
@@ -37,12 +42,13 @@ public class EmployeeBinaryTree {
         }
     }
 
+    // Level-order traversal to display employee details
     public void levelOrderTraversal(org.example.view.ConsoleView view) {
         if (root == null) {
             view.displayMessage("The tree is empty.");
             return;
         }
-
+        // Use a queue for level-order traversal
         java.util.Queue<TreeNode> queue = new java.util.LinkedList<>();
         queue.add(root);
         int nodeNumber = 1;
@@ -63,7 +69,7 @@ public class EmployeeBinaryTree {
             }
         }
     }
-
+    // Get the height of the binary tree
     public int getHeight() {
         return getHeightRec(root);
     }
@@ -76,6 +82,7 @@ public class EmployeeBinaryTree {
         return 1 + Math.max(leftHeight, rightHeight);
     }
 
+    // Get the total number of nodes in the binary tree
     public int getNodeCount() {
         return countNodesRec(root);
     }

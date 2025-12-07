@@ -1,5 +1,8 @@
 package org.example.model;
 
+/**
+ * This class represents an Employee with various attributes.
+ */
 public class Employee {
     private String firstName;
     private String lastName;

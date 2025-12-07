@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class handles file operations related to Employee data.
+ * It reads employee information from a CSV file and creates Employee objects.
+ */
 public class FileHandler {
     public static List<Employee> readEmployeesFromFile(String fileName) {
         List<Employee> employees = new ArrayList<>();
@@ -27,7 +31,6 @@ public class FileHandler {
                     Employee employee = getEmployee(values);
                     employees.add(employee);
                 }
-
             }
 
             System.out.println("File read successfully with " + employees.size() + " employees.");
@@ -38,7 +41,7 @@ public class FileHandler {
 
         return  employees;
     }
-
+    // Helper method to create Employee object from CSV values
     private static Employee getEmployee(String[] values) {
         Employee employee = new Employee();
         employee.setFirstName(values[0].trim());

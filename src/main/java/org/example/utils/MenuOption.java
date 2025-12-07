@@ -1,5 +1,8 @@
 package org.example.utils;
 
+/**
+ * Enum representing the menu options available in the application.
+ */
 public enum MenuOption {
     SORT("1. Sort Employees"),
     SEARCH("2. Search Employees"),
@@ -17,6 +20,7 @@ public enum MenuOption {
         return displayName;
     }
 
+    // Method to get MenuOption from its corresponding number
     public static MenuOption fromNumber(int number) {
         switch (number) {
             case 1:
@@ -34,6 +38,7 @@ public enum MenuOption {
         }
     }
 
+    // Method to display all menu options
     public static void displayMenuOptions() {
         for (MenuOption menuOption : MenuOption.values()) {
             System.out.println(menuOption.getDisplayName());

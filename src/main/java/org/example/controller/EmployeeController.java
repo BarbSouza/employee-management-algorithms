@@ -12,6 +12,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * EmployeeController manages the main application logic for employee management.
+ * It handles sorting, searching, adding employees, and creating a binary tree of employees.
+ * It interacts with the ConsoleView for user input and output.
+ * It interacts with SortingAlgorithms and SearchAlgorithms for sorting and searching functionalities.
+ */
 public class EmployeeController {
     private ConsoleView view;
     private List<Employee> employees;
@@ -23,6 +29,7 @@ public class EmployeeController {
 
     private boolean isSorted = false;
 
+    // Sort employees by full name using merge sort
     private void sortEmployees() {
         view.displayMessage("--- Sorting Employees by Name ---");
         employees = SortingAlgorithms.mergeSort(new ArrayList<>(employees));
@@ -31,6 +38,7 @@ public class EmployeeController {
         view.displayEmployees(employees, 20);
     }
 
+    // Search for an employee by full name using binary search
     private void searchEmployee() {
         view.displayMessage("--- Search Employee by Full Name ---");
         String searchName = view.getUserInput("Enter full name to search: ");
@@ -50,6 +58,7 @@ public class EmployeeController {
         }
     }
 
+    // Format name to have the first letter capitalized and the rest lowercase
     private String formatName(String name) {
         if (name == null || name.trim().isEmpty()) {
             return "";
@@ -58,6 +67,7 @@ public class EmployeeController {
         return name.substring(0, 1).toUpperCase() + name.substring(1).toLowerCase();
     }
 
+    // Add a new employee with validated inputs
     private void addEmployee() {
         view.displayMessage("--- Add New Employee ---");
 
@@ -203,23 +213,20 @@ public class EmployeeController {
         view.displayEmployee(newEmployee);
     }
 
+    // Create a binary search tree of employees based on hierarchical position levels
     private void createBinaryTree() {
-        view.displayMessage("--- Create Binary Search Tree of Employees ---");
-
         List<Employee> hierarchicalEmployees = sortByHierarchyLevel(employees);
 
         EmployeeBinaryTree tree = new EmployeeBinaryTree();
 
         int count = Math.min(20, hierarchicalEmployees.size());
 
-        view.displayMessage("--- Create Binary Tree of " + count + " Employees ---");
-        view.displayMessage("(Based on Hierarchical Position Levels (1 to 5)");
-
         for (int i = 0; i < count; i++) {
             tree.insert(hierarchicalEmployees.get(i));
         }
 
         view.displayMessage("--- School Employees Hierarchy Tree ---");
+        view.displayMessage("Based on Hierarchical Position Levels (1 to 5)");
         tree.levelOrderTraversal(view);
 
         view.displayMessage("--- Tree Statistics ---");
@@ -228,6 +235,7 @@ public class EmployeeController {
 
     }
 
+    // Sort employees by hierarchical position level and department
     private List<Employee> sortByHierarchyLevel(List<Employee> employees) {
         List<Employee> sorted = new ArrayList<>(employees);
 
@@ -244,6 +252,7 @@ public class EmployeeController {
         return sorted;
     }
 
+    // Extract numerical level from position string
     private int extractLevel(String position) {
         if (position == null || position.isEmpty()) {
             return Integer.MAX_VALUE;
@@ -256,7 +265,7 @@ public class EmployeeController {
         }
     }
 
-
+    // Start the main application loop
     public void run() {
         boolean exit = false;
         while (!exit) {
