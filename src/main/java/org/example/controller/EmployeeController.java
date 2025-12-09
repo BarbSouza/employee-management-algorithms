@@ -73,7 +73,7 @@ public class EmployeeController {
 
         String firstName;
         do {
-            firstName = view.getUserInput("Enter First Name: ");
+            firstName = formatName(view.getUserInput("Enter First Name: "));
             if (firstName.trim().isEmpty()) {
                 view.displayError("First Name cannot be empty. Please try again.");
             }
@@ -81,7 +81,7 @@ public class EmployeeController {
 
         String lastName;
         do {
-            lastName = view.getUserInput("Enter Last Name: ");
+            lastName = formatName(view.getUserInput("Enter Last Name: "));
             if (lastName.trim().isEmpty()) {
                 view.displayError("Last Name cannot be empty. Please try again.");
             }
